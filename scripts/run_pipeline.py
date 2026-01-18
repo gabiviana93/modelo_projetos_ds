@@ -35,7 +35,8 @@ def main():
         with open("reports/metrics.json", "w") as f:
             json.dump(metrics, f, indent=4)
 
-        save_model(pipeline)
+        # Passar um exemplo do X_test para o save_model registrar a signature
+        save_model(pipeline, X_example=X_test)
 
 if __name__ == "__main__":
     main()

@@ -38,13 +38,14 @@ def train_model(preprocessor, X_train=None, y_train=None):
 
     return pipeline
 
-def save_model(model, model_name="xgboost-pipeline"):
+def save_model(model, model_name="xgboost-pipeline", X_example=None):
     """
     Salva o modelo localmente e registra no MLflow.
     
     Args:
         model: Pipeline treinado
         model_name: Nome do modelo no MLflow
+        X_example: DataFrame de exemplo para inferência de signature
     """
     # Salvar localmente
     dump(model, MODEL_PATH)
@@ -59,10 +60,18 @@ def save_model(model, model_name="xgboost-pipeline"):
     # Registrar artefato com descrição
     mlflow.log_artifact(MODEL_PATH, artifact_path="model")
     
-    # Registrar modelo no MLflow
-    mlflow.sklearn.log_model(
-        model, 
-        artifact_path="sklearn-model",
-        registered_model_name=model_name
-    )
+    # Registrar modelo no MLflow com input_example para inferência de signature
+    if X_example is not None:
+        mlflow.sklearn.log_model(
+            model, 
+            artifact_path="sklearn-model",
+            registered_model_name=model_name,
+            input_example=X_example.iloc[:1] if hasattr(X_example, 'iloc') else X_example[:1]
+        )
+    else:
+        mlflow.sklearn.log_model(
+            model, 
+            artifact_path="sklearn-model",
+            registered_model_name=model_name
+        )
 
