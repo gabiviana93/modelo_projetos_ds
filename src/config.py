@@ -13,7 +13,7 @@ RANDOM_STATE = 42
 
 # Configuração MLflow
 MLFLOW_TRACKING_URI = os.path.join(BASE_DIR, "mlruns")
-MLFLOW_EXPERIMENT = "mlflow_test_experiment"
+MLFLOW_EXPERIMENT = "mlflow_test_experiments"
 MODEL_NAME = "xgboost_classifier"
 MODEL_PARAMS = {
         "n_estimators": 300,
