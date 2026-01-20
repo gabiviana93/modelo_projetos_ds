@@ -44,6 +44,10 @@ def evaluate(model, X_test, y_test):
 
     metrics = {
         "roc_auc": roc_auc,
+        "accuracy": report['accuracy'],
+        "precision": report['weighted avg']['precision'],
+        "recall": report['weighted avg']['recall'],
+        "f1_score": report['weighted avg']['f1-score'],
         "report": report
     }
 
