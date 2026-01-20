@@ -543,7 +543,7 @@ poetry run python scripts/test_pipeline.py
 
 ### Deploy e Produção
 
-- [ ] **Testes passando**: >70% cobertura
+- [ ] **Testes passando**: >80% cobertura
 - [ ] **MLflow configurado**: Experimentos rodando
 - [ ] **Dashboard funcionando**: `streamlit run scripts/dashboard.py`
 - [ ] **Monitoramento ativo**: Drift detection configurado
@@ -709,7 +709,7 @@ Você agora tem um framework completo e pronto para produção!
 - ✅ Adapte preprocessamento e métricas
 - ✅ Teste localmente antes de push
 - ✅ Use MLflow para rastrear tudo
-- ✅ Mantenha >70% de cobertura de testes
+- ✅ Mantenha >80% de cobertura de testes
 
 **Boa sorte com seu projeto! 🚀**
 

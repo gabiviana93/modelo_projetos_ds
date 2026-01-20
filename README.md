@@ -1,17 +1,17 @@
 # Data Science End-to-End Project Framework
 
 [![CI Status](https://img.shields.io/badge/CI-passing-brightgreen)](https://github.com)
-[![Coverage](https://img.shields.io/badge/coverage-70%25-green)](https://github.com)
+[![Coverage](https://img.shields.io/badge/coverage-88%25-brightgreen)](https://github.com)
 [![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11-blue)](https://www.python.org/)
 [![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen)](https://github.com)
 
-Framework completo e reutilizável para projetos de Ciência de Dados, seguindo boas práticas de MLOps, com CI/CD integrado, testes automatizados e cobertura de código superior a 70%.
+Framework completo e reutilizável para projetos de Ciência de Dados, seguindo boas práticas de MLOps, com CI/CD integrado, testes automatizados e cobertura de código superior a 80%.
 
 ## 🎯 Objetivo
 
 Fornecer um **framework de produção** para projetos de Machine Learning com:
 - ✅ Pipeline completo end-to-end
-- ✅ Testes automatizados (70%+ coverage)
+- ✅ Testes automatizados (80%+ coverage)
 - ✅ CI/CD com GitHub Actions
 - ✅ Rastreamento de experimentos (MLflow)
 - ✅ Monitoramento de drift
@@ -36,7 +36,7 @@ Fornecer um **framework de produção** para projetos de Machine Learning com:
 
 ### Quality & Testing
 - **Testes**: Pytest 7.4+ com fixtures centralizadas
-- **Coverage**: pytest-cov (>70% cobertura)
+- **Coverage**: pytest-cov (>80% cobertura)
 - **CI/CD**: GitHub Actions (multi-version testing)
 - **Linting**: Flake8, Autopep8
 
@@ -78,7 +78,7 @@ modelo_projetos_ds/
 │   ├── test_pipeline.py      # Testes end-to-end
 │   ├── monitoring_pipeline.py # Monitoramento de drift
 │   └── dashboard.py          # Dashboard Streamlit
-├── tests/                # Testes unitários (70%+ coverage)
+├── tests/                # Testes unitários (80%+ coverage)
 │   ├── conftest.py       # Fixtures compartilhadas
 │   ├── test_features.py
 │   ├── test_train.py
@@ -309,8 +309,8 @@ poetry add nome-do-pacote
 ✅ **Type hints** e docstrings em funções críticas
 
 ### 🧪 Qualidade & Testes
-✅ **Testes unitários** com pytest (44 testes)  
-✅ **Cobertura de código** superior a 70%  
+✅ **Testes unitários** com pytest (55 testes)  
+✅ **Cobertura de código** superior a 80% (atual: 88%)  
 ✅ **Fixtures centralizadas** para reutilização  
 ✅ **Testes end-to-end** para validar pipeline completo  
 ✅ **CI/CD automatizado** com GitHub Actions (3 workflows)  

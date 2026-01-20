@@ -27,7 +27,7 @@ jobs:
       - name: Instalar Poetry
         uses: snok/install-poetry@v1
         with:
-          version: latest
+          version: 1.8.2
           virtualenvs-create: true
           virtualenvs-in-project: true
       
@@ -92,7 +92,7 @@ jobs:
       - name: Instalar Poetry
         uses: snok/install-poetry@v1
         with:
-          version: latest
+          version: 1.8.2
           virtualenvs-create: true
           virtualenvs-in-project: true
       
@@ -134,7 +134,7 @@ jobs:
       - name: Instalar Poetry
         uses: snok/install-poetry@v1
         with:
-          version: latest
+          version: 1.8.2
           virtualenvs-create: true
           virtualenvs-in-project: true
       
@@ -199,7 +199,7 @@ jobs:
       - name: Instalar Poetry
         uses: snok/install-poetry@v1
         with:
-          version: latest
+          version: 1.8.2
           virtualenvs-create: true
           virtualenvs-in-project: true
       
@@ -220,7 +220,7 @@ jobs:
           import sys
           import pandas as pd
           import numpy as np
-          from src.monitoring import calculate_psi, detect_drift
+          from src.monitoring import population_stability_index, detect_drift
           
           # Gerar dados de teste sem drift
           np.random.seed(42)
@@ -228,13 +228,13 @@ jobs:
           current = np.random.normal(loc=0, scale=1, size=1000)
           
           # Calcular PSI
-          psi = calculate_psi(baseline, current)
+          psi = population_stability_index(baseline, current)
           print(f'PSI (sem drift): {psi:.4f}')
           assert psi < 0.15, f'PSI muito alto para dados similares: {psi}'
           
           # Gerar dados com drift
           current_drift = np.random.normal(loc=1, scale=1, size=1000)
-          psi_drift = calculate_psi(baseline, current_drift)
+          psi_drift = population_stability_index(baseline, current_drift)
           print(f'PSI (com drift): {psi_drift:.4f}')
           
           print('✅ Detecção de drift validada!')

@@ -34,6 +34,10 @@ def test_evaluate_returns_dict(mock_model_for_eval):
         metrics = evaluate(mock_model_for_eval, X_test, y_test)
         assert isinstance(metrics, dict)
         assert 'roc_auc' in metrics
+        assert 'accuracy' in metrics
+        assert 'precision' in metrics
+        assert 'recall' in metrics
+        assert 'f1_score' in metrics
         assert 'report' in metrics
 
 def test_evaluate_roc_auc_range(mock_model_for_eval):

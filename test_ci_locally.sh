@@ -65,8 +65,8 @@ else
 fi
 
 # 4. Cobertura de testes (opcional, continue mesmo se falhar)
-print_step "4. Verificando cobertura de testes..."
-poetry run pytest tests/ --cov=src --cov-report=term-missing --cov-report=html 2>/dev/null || echo "⚠️  Cobertura não disponível"
+print_step "4. Verificando cobertura de testes (mínimo 80%)..."
+poetry run pytest tests/ --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80 2>/dev/null || echo "⚠️  Cobertura abaixo de 80% ou não disponível"
 
 # 5. Linting (opcional)
 print_step "5. Verificando linting com flake8..."
