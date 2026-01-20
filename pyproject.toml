@@ -32,17 +32,21 @@ jupyter = "^1.0"
 ipython = "^8.17"
 
 [tool.pytest.ini_options]
+minversion = "8.0"
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-addopts = "-v --strict-markers --tb=short --disable-warnings"
+addopts = "-ra -q --cov=src --cov-report=term-missing -v --strict-markers --tb=short --disable-warnings"
 
 [tool.coverage.run]
+branch = true
 source = ["src"]
 omit = ["*/tests/*", "*/test_*.py", "*/__pycache__/*"]
 
 [tool.coverage.report]
+fail_under = 70
+show_missing = true
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",
@@ -56,16 +60,3 @@ exclude_lines = [
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.pytest.ini_options]
-minversion = "8.0"
-addopts = "-ra -q --cov=src --cov-report=term-missing"
-testpaths = ["tests"]
-
-[tool.coverage.run]
-branch = true
-source = ["src"]
-
-[tool.coverage.report]
-fail_under = 70
-show_missing = true
