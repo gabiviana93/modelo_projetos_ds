@@ -1,7 +1,11 @@
 import mlflow
 from sklearn.metrics import roc_auc_score, classification_report
+from src.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def evaluate(model, X_test, y_test):
+    logger.info(f"Iniciando avaliação com {X_test.shape[0]} amostras")
     preds = model.predict(X_test)
     proba = model.predict_proba(X_test)[:, 1]
 
@@ -30,6 +34,13 @@ def evaluate(model, X_test, y_test):
             metrics_to_log[key] = report['weighted avg'][metric_name]
     
     mlflow.log_metrics(metrics_to_log)
+    
+    logger.info("Avaliação concluída", extra={
+        'roc_auc': roc_auc,
+        'precision_weighted': report['weighted avg']['precision'],
+        'recall_weighted': report['weighted avg']['recall'],
+        'f1_weighted': report['weighted avg']['f1-score']
+    })
 
     metrics = {
         "roc_auc": roc_auc,

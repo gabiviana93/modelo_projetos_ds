@@ -7,3 +7,6 @@ joblib
 scipy
 matplotlib
 seaborn
+pytest
+shap
+streamlit
