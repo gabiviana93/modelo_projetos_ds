@@ -17,7 +17,11 @@ Demonstrar um pipeline completo de Machine Learning com:
 - **Python**: 3.11+
 - **Data**: Pandas 2.0+, NumPy 1.24+
 - **ML**: Scikit-learn 1.3+, XGBoost 2.0+
+- **Validação**: Cross-validation com StratifiedKFold
 - **Experimentos**: MLflow 2.22.4
+- **Interpretabilidade**: SHAP, Feature Importance
+- **Monitoramento**: Streamlit, PSI (Population Stability Index)
+- **Logging**: JSON estruturado
 - **Visualização**: Matplotlib 3.8+, Seaborn 0.13+
 - **Ambiente**: Poetry 1.7+
 
@@ -36,17 +40,20 @@ modelo_projetos_ds/
 ├── src/
 │   ├── __init__.py
 │   ├── config.py         # Configurações centralizadas
-│   ├── preprocessing.py  # Preprocessamento de dados
-│   ├── features.py       # Feature engineering
-│   ├── train.py          # Treinamento com MLflow
-│   ├── evaluate.py       # Avaliação e métricas
-│   ├── monitoring.py     # Monitoramento de modelos
-│   └── inference.py      # Inferência
+│   ├── preprocessing.py  # Preprocessamento de dados (com logging)
+│   ├── features.py       # Feature engineering com SimpleImputer
+│   ├── train.py          # Treinamento + Cross-validation com logging
+│   ├── evaluate.py       # Avaliação de métricas com logging
+│   ├── monitoring.py     # Monitoramento de drift com logging
+│   ├── inference.py      # Inferência com logging
+│   ├── interpret.py      # Feature importance e SHAP
+│   └── logger.py         # Sistema genérico de logging JSON
 ├── scripts/
 │   ├── run_pipeline.py       # Pipeline completo de produção
-│   ├── train_pipeline.py     # Script de treinamento
+│   ├── train_pipeline.py     # Script de treinamento com CV
 │   ├── test_pipeline.py      # Testes end-to-end
-│   └── monitoring_pipeline.py # Monitoramento
+│   ├── monitoring_pipeline.py # Monitoramento de drift
+│   └── dashboard.py          # Dashboard Streamlit
 ├── models/               # Modelos treinados (versionados)
 ├── reports/
 │   ├── metrics.json      # Métricas de desempenho
@@ -219,13 +226,18 @@ Para mais detalhes, veja [POETRY_GUIDE.md](POETRY_GUIDE.md).
 
 ✅ **Separação clara** entre código de experimentação (notebooks) e produção (scripts)  
 ✅ **Rastreamento de experimentos** com MLflow (versão 2.22.4)  
-✅ **Preprocessamento e feature engineering reutilizáveis**  
+✅ **Cross-validation** com StratifiedKFold (5-fold) e 4 métricas  
+✅ **Feature Importance** nativa do XGBoost + SHAP values  
+✅ **Preprocessamento robusto** com SimpleImputer (mediana + constant)  
+✅ **Dashboard interativo** com Streamlit (métricas, gráficos, alertas)  
+✅ **Logging estruturado** em JSON (genérico em todos os módulos)  
+✅ **Monitoramento de data drift** com PSI por feature  
 ✅ **Versionamento automático** de modelos e artefatos  
 ✅ **Configuração centralizada** em `src/config.py`  
 ✅ **Signature automática** para modelos (sem warnings)  
 ✅ **Tags e descrição** de modelos para rastreabilidade  
 ✅ **Testes end-to-end** para validar pipeline completo  
-✅ **Monitoramento de data drift** com `monitoring.py`
+✅ **Testes unitários** com pytest e fixtures centralizadas
 
 ## Fluxo de Trabalho Recomendado
 
@@ -250,14 +262,24 @@ poetry run python scripts/test_pipeline.py
 ```
 
 ### 5. Produção
-```bash
+```bitash
 poetry run python scripts/run_pipeline.py
 ```
 
-### 6. Monitoramento (Opcional)
+### 6. Monitoramento de Drift
 ```bash
 poetry run python scripts/monitoring_pipeline.py
 ```
+
+### 7. Dashboard de Performance
+```bash
+poetry run streamlit run scripts/dashboard.py
+```
+Acesse `http://localhost:8501` para visualizar:
+- Métricas em tempo real (ROC-AUC, F1, Precision, Recall)
+- Evolução temporal das métricas
+- Histórico de runs do MLflow
+- Alertas automáticos de degradação
 
 ## Troubleshooting
 
@@ -314,12 +336,18 @@ Após executar o pipeline, verifique `reports/metrics.json`:
 - ✓ Número de amostras de treinamento
 - ✓ Número de features
 
+### Gerenciamento de projeto, Testes Unitários e CI
+✔️ Testes unitários com pytest  
+✔️ Pipeline CI com GitHub Actions  
+✔️ Coverage automatizado  
+✔️ Gerenciamento de dependências com Poetry
+
 ### Tags Registradas
 - `model_type`: xgboost_classifier
 - `framework`: scikit-learn
 - `preprocessing`: StandardScaler + OneHotEncoder
 
-## Arquivos Importantes
+## Documentação Adicional
 
 - **[pyproject.toml](pyproject.toml)** - Configuração de dependências e metadados
 - **[POETRY_GUIDE.md](POETRY_GUIDE.md)** - Guia completo de uso do Poetry
