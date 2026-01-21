@@ -24,3 +24,16 @@ MODEL_PARAMS = {
         "random_state": 42,
         "eval_metric": "logloss"
     }
+
+
+DATA_PATH_RAW = "data/raw/dataset.csv"
+DATA_PATH_PROCESSED = "data/processed/dataset_clean.csv"
+
+TARGET_COL = "target"
+ID_COL = "id"
+
+NUMERIC_COLS = None        # se None → detecta automaticamente
+CATEGORICAL_COLS = None   # se None → detecta automaticamente
+
+N_SPLITS = 5
+PRIMARY_METRIC = "roc_auc"
